@@ -1,15 +1,11 @@
-package com.example.jdbc_api;
+package com.example.jdbc_api.repository;
 
+import com.example.jdbc_api.model.Person;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.io.BufferedReader;
@@ -31,9 +27,9 @@ public class RepositoryJdbc {
     }
 
     public List<Person> getPersonsByCity(String city) {
-        String script = "SELECT p.name FROM Person p WHERE p.city_of_living = :city_of_living";
+        String script = "SELECT p.name FROM Person p WHERE p.city = :city";
         TypedQuery<Person> query = entityManager.createQuery(script, Person.class);
-        query.setParameter("city_of_living", city);
+        query.setParameter("city", city);
         return query.getResultList();
     }
 

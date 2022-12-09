@@ -1,5 +1,7 @@
-package com.example.jdbc_api;
+package com.example.jdbc_api.controller;
 
+import com.example.jdbc_api.model.Person;
+import com.example.jdbc_api.repository.RepositoryJdbc;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;

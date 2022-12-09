@@ -1,12 +1,10 @@
-package com.example.jdbc_api;
+package com.example.jdbc_api.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,8 +16,8 @@ public class Person {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(nullable = false)
-    private String city_of_living;
+    @Column(name = "city_of_living", nullable = false)
+    private String city;
 
     @Column(nullable = false)
     private String name;
