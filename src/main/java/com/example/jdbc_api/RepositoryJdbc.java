@@ -1,6 +1,11 @@
 package com.example.jdbc_api;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,11 +22,19 @@ import java.util.stream.Collectors;
 @Repository
 public class RepositoryJdbc {
 
-
+    @PersistenceContext
+    private EntityManager entityManager;
     private final NamedParameterJdbcTemplate jdbcTemplate;
 
     public RepositoryJdbc(NamedParameterJdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
+    }
+
+    public List<Person> getPersonsByCity(String city) {
+        String script = "SELECT p.name FROM Person p WHERE p.city_of_living = :city_of_living";
+        TypedQuery<Person> query = entityManager.createQuery(script, Person.class);
+        query.setParameter("city_of_living", city);
+        return query.getResultList();
     }
 
     List<String> getProductName(String name) {

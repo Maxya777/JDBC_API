@@ -20,4 +20,8 @@ public class JdbcController {
         return repositoryJdbc.getProductName(name);
     }
 
+    @GetMapping("/persons/by-city")
+    public List<Person> getPersonsByCity(@RequestParam("city") String city) {
+        return repositoryJdbc.getPersonsByCity(city);
+    }
 }
