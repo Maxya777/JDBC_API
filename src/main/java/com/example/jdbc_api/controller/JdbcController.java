@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class JdbcController {
@@ -17,13 +18,19 @@ public class JdbcController {
         this.repositoryJdbc = repositoryJdbc;
     }
 
-    @GetMapping("/products/fetch-product")
-    public List<String> getProduct(@RequestParam("name") String name) {
-        return repositoryJdbc.getProductName(name);
+    @GetMapping("/persons/get-data")
+    public Optional<Person> findByNameAndSurname(@RequestParam("name") String name,
+                                                 @RequestParam("surname") String surname) {
+        return repositoryJdbc.findByNameAndSurname(name, surname);
     }
 
     @GetMapping("/persons/by-city")
-    public List<Person> getPersonsByCity(@RequestParam("city") String city) {
-        return repositoryJdbc.getPersonsByCity(city);
+    public List<Person> findByCity(@RequestParam("city") String city) {
+        return repositoryJdbc.findByCity(city);
+    }
+
+    @GetMapping("/persons/by-age")
+    public List<Person> findByAgeLessThanOrderByAge(@RequestParam("age") int age) {
+        return repositoryJdbc.findByAgeLessThanOrderByAge(age);
     }
 }

@@ -3,8 +3,7 @@ package com.example.jdbc_api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
+@Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,5 +27,7 @@ public class Person {
     @Column
     private int age;
 
+    @Column(name = "phone_number", nullable = false)
+    private String phone;
 
 }
