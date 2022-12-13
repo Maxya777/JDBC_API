@@ -1,7 +1,8 @@
 package com.example.jdbc_api.model;
 
-import jakarta.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 
 @Data
 @Builder
